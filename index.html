@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Image Editor</title>
+    <link rel="stylesheet" href="./css/css.css">
+    <!-- <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto Slab', serif;
+        }
+
+        body {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .main {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px;
+        }
+
+        .show-upload-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+        }
+
+        .img-preview {
+            width: 600px;
+            height: 400px;
+            border: 2px solid;
+            margin: 20px;
+            overflow: hidden;
+        }
+
+        .change {
+            margin: 20px;
+        }
+
+        .image-container {
+            width: 100%;
+            height: 100%;
+        }
+
+        .change span {
+            display: inline-block;
+            text-align: center;
+            width: 300px;
+            border: 2px solid;
+            padding: 10px;
+        }
+
+        .file-upload-container {
+            position: relative;
+            width: 300px;
+            height: 40px;
+            overflow: hidden;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        #img-upload {
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+        }
+
+        .file-upload-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+            font-size: 20px;
+            font-weight: bold;
+            color: #757575;
+        }
+
+        #img-url {
+            width: 300px;
+            height: 40px;
+            overflow: hidden;
+            background-color: #f0f0f0;
+            padding: 0 0 0 10px;
+            border: none;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        #img-url:focus {
+            outline: none;
+        }
+
+        .edit-options {
+            width: 50%;
+            padding: 10px;
+            margin: 20px;
+        }
+
+        #bright-range,
+        #saturation-range,
+        #contrast-range,
+        #hue-range {
+            width: 60%;
+            height: 10px;
+            -webkit-appearance: none;
+            background: #d3d3d3;
+            outline: none;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+            border-radius: 5px;
+        }
+
+        #bright-range::-webkit-slider-thumb,
+        #saturation-range::-webkit-slider-thumb,
+        #contrast-range::-webkit-slider-thumb,
+        #hue-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #4CAF50;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        #bright-range:hover,
+        #saturation-range:hover,
+        #contrast-range:hover,
+        #hue-range:hover {
+            opacity: 1;
+        }
+
+        #bright-input,
+        #saturation-input,
+        #contrast-input,
+        #hue-input {
+            width: 30px;
+            text-align: center;
+            border-radius: 20px;
+            font-weight: bold;
+            border: 1px solid #4CAF50;
+        }
+
+        #bright-input:focus,
+        #saturation-input:focus,
+        #contrast-input:focus,
+        #hue-input:focus {
+            outline: 1px solid #4CAF50;
+        }
+    </style> -->
+</head>
+
+<body>
+    <nav></nav>
+
+    <div class="main">
+        <div class="show-upload-container">
+            <div class="img-preview">
+                <img src="./img/ter.jpg" alt="your image here" id="image-container" class="image-container">
+            </div>
+            <div class="img-accept-box">
+                <label for="img-upload" class="file-upload-container" id="file-upload-container">
+                    <input type="file" id="img-upload" oninput="upload(event)" accept="image/*">
+                    <span class="file-upload-text">Choose Image</span>
+                </label>
+                <input type="text" id="img-url" oninput="imgLink()" placeholder="Paste Image URL">
+            </div>
+            <div class="change">
+                <span id="file-upload" onclick="changeUpload()">UPLOAD</span><span id="past-url"
+                    onclick="changeUrl()">URL</span>
+            </div>
+        </div>
+
+        <div class="edit-options">
+            <table width="100%">
+                <tr>
+                    <td><label for="bright-range">Brightness (in %):</label></td>
+                    <td><input type="range" min="0" max="200" value="100" id="bright-range" oninput="brigt()"> <input
+                            type="text" id="bright-input" value="100" oninput="brigt1()">
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="saturation-range">Saturation (in %):</label></td>
+                    <td><input type="range" min="0" max="200" value="100" id="saturation-range" oninput="saturation()">
+                        <input type="text" id="saturation-input" value="100" oninput="saturation1()">
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="contrast-range">Contrast:</label></td>
+                    <td><input type="range" min="0" max="200" value="100" id="contrast-range" oninput="contrast()">
+                        <input type="text" id="contrast-input" value="100" oninput="contrast1()">
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="hue-range">Hue:</label></td>
+                    <td><input type="range" min="0" max="200" value="100" id="hue-range" oninput="hue()"> <input
+                            type="text" id="hue-input" value="100" oninput="hue1()"></td>
+                </tr>
+                <!-- <tr>
+                    <td><label for="hue-range">Hue:</label></td>
+                    <td><input type="range" min="0" max="200" value="100" id="hue-range" oninput="hue()"> <input
+                            type="text" id="hue-input" value="100" oninput="hue1()"></td>
+                </tr> -->
+                <tr>
+                    <td colspan="2" align="center"><button id="reset-filter">Reset Filter</button></td>
+                </tr>
+            </table>
+        </div>
+        <script src="./js/js.js"></script>
+</body>
+
+</html>

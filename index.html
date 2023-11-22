@@ -6,65 +6,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Image Editor</title>
     <link rel="stylesheet" href="./css/css.css">
+    <!-- <link rel="stylesheet" href="./css/password.css"> -->
+    <link rel="stylesheet" href="./css/reload.css">
 </head>
 
 <body>
+
+
+    <!-- add password -->
+    <!-- <div class="modal" id="overlay">
+        <p>Please enter the password:</p>
+        <input type="password" id="passwordInput">
+        <span class="c01" onclick="checkPassword()">Submit</span>
+    </div> -->
+
+
+
+
     <nav></nav>
+    <div class="main-none" id="d-none">
+        <div class="main">
+            <div class="show-upload-container">
 
-    <div class="main">
-        <div class="show-upload-container">
-            <div class="img-preview">
-                <img src="./img/ter.jpg" alt="your image here" id="image-container" class="image-container">
+                <!-- !image preview section -->
+                <div class="img-preview">
+                    <img src="./img/ter.jpg" alt="your image here" id="image-container" class="image-container">
+                </div>
+
+
+                <!-- !image accept box -->
+                <div class="img-accept-box">
+                    <label for="img-upload" class="file-upload-container" id="file-upload-container">
+                        <input type="file" id="img-upload" oninput="upload(event)" accept="image/*">
+                        <span class="file-upload-text">Choose Image</span>
+                    </label>
+                    <input type="text" id="img-url" oninput="imgLink()" placeholder="Paste Image URL">
+                </div>
+
+                <!--! image upload option -->
+
+                <div class="change">
+                    <span id="file-upload" onclick="changeUpload()">UPLOAD</span><span id="past-url"
+                        onclick="changeUrl()">URL</span>
+                </div>
             </div>
-            <div class="img-accept-box">
-                <label for="img-upload" class="file-upload-container" id="file-upload-container">
-                    <input type="file" id="img-upload" oninput="upload(event)" accept="image/*">
-                    <span class="file-upload-text">Choose Image</span>
-                </label>
-                <input type="text" id="img-url" oninput="imgLink()" placeholder="Paste Image URL">
-            </div>
-            <div class="change">
-                <span id="file-upload" onclick="changeUpload()">UPLOAD</span><span id="past-url"
-                    onclick="changeUrl()">URL</span>
+
+
+
+
+            <!-- image filtering option -->
+            <div class="edit-options">
+                <table width="100%">
+                    <tr>
+                        <td><label for="bright-range">Brightness (in %):</label></td>
+                        <td><input type="range" min="0" max="200" value="100" id="bright-range" oninput="brigt()"
+                                class="apply-css "> <input type="text" id="bright-input" value="0" oninput="brigt1()">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="saturation-range">Saturation (in %):</label></td>
+                        <td><input type="range" min="0" max="200" value="100" id="saturation-range"
+                                oninput="saturation()" class="apply-css ">
+                            <input type="text" id="saturation-input" value="0" oninput="saturation1()">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="contrast-range">Contrast:</label></td>
+                        <td><input type="range" min="0" max="200" value="100" id="contrast-range" oninput="contrast()"
+                                class="apply-css ">
+                            <input type="text" id="contrast-input" value="0" oninput="contrast1()">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="hue-range">Hue:</label></td>
+                        <td><input type="range" min="0" max="200" value="0" id="hue-range" oninput="hue()"
+                                class="apply-css "> <input type="text" id="hue-input" value="0" oninput="hue1()"></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="invert-range">invert:</label></td>
+                        <td><input type="range" min="0" max="200" value="0" id="invert-range" oninput="invert()"
+                                class="apply-css "> <input type="text" id="invert-input" value="0" oninput="invert1()">
+                        </td>
+                    </tr>
+                    <!-- filter reset button -->
+                    <tr>
+                        <td colspan="2" align="center"><button id="reset-filter" class="button"
+                                style="margin: 20px 0 0 0;">Reset Filter</button>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
+    </div>
 
-        <div class="edit-options">
-            <table width="100%">
-                <tr>
-                    <td><label for="bright-range">Brightness (in %):</label></td>
-                    <td><input type="range" min="0" max="200" value="100" id="bright-range" oninput="brigt()"> <input
-                            type="text" id="bright-input" value="100" oninput="brigt1()">
-                    </td>
-                </tr>
-                <tr>
-                    <td><label for="saturation-range">Saturation (in %):</label></td>
-                    <td><input type="range" min="0" max="200" value="100" id="saturation-range" oninput="saturation()">
-                        <input type="text" id="saturation-input" value="100" oninput="saturation1()">
-                    </td>
-                </tr>
-                <tr>
-                    <td><label for="contrast-range">Contrast:</label></td>
-                    <td><input type="range" min="0" max="200" value="100" id="contrast-range" oninput="contrast()">
-                        <input type="text" id="contrast-input" value="100" oninput="contrast1()">
-                    </td>
-                </tr>
-                <tr>
-                    <td><label for="hue-range">Hue:</label></td>
-                    <td><input type="range" min="0" max="200" value="100" id="hue-range" oninput="hue()"> <input
-                            type="text" id="hue-input" value="100" oninput="hue1()"></td>
-                </tr>
-                <!-- <tr>
-                    <td><label for="hue-range">Hue:</label></td>
-                    <td><input type="range" min="0" max="200" value="100" id="hue-range" oninput="hue()"> <input
-                            type="text" id="hue-input" value="100" oninput="hue1()"></td>
-                </tr> -->
-                <tr>
-                    <td colspan="2" align="center"><button id="reset-filter">Reset Filter</button></td>
-                </tr>
-            </table>
-        </div>
-        <script src="./js/js.js"></script>
+
+    <div class="reload-button">
+        <button id="refreshButton" class="button">Reload This page</button>
+    </div>
+
+
+    <script src="./js/js.js"></script>
+    <!-- <script src="./js/password.js"></script> -->
+    <script src="./js/reload.js"></script>
+
 </body>
 
 </html>

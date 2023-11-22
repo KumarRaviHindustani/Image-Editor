@@ -9,30 +9,33 @@ let filters = {
     brightness: 100,
     saturation: 100,
     contrast: 100,
-    hue: 100,
-    invert: 100
+    hue: 0,
+    invert: 0,
 };
 
-imgUrl.style.display = "none";
+imgUrl.style.display = "none"; // file upload by url option hide
+
+
+// file upload option show
 
 function changeUpload() {
-    fileUplod.style.display = "block";
+    fileUplod.style.display = "block";   // file upload option show
     fileUpload.style.backgroundColor = "black";
     fileUpload.style.border = "2px solid black";
     fileUpload.style.color = "white";
     pastUrl.style.backgroundColor = "white";
     pastUrl.style.color = "black";
-    imgUrl.style.display = "none";
+    imgUrl.style.display = "none"; // file upload by url option hide
 }
 
 function changeUrl() {
-    imgUrl.style.display = "block";
+    imgUrl.style.display = "block";   // file upload by url option show
     pastUrl.style.backgroundColor = "black";
     pastUrl.style.color = "white";
     pastUrl.style.border = "2px solid black";
     fileUpload.style.backgroundColor = "white";
     fileUpload.style.color = "black";
-    fileUplod.style.display = "none";
+    fileUplod.style.display = "none"; // file upload option hide
 }
 
 function upload(evt) {
@@ -47,8 +50,9 @@ function imgLink() {
 }
 
 function applyFilters() {
-    imgContainer.style.filter = `brightness(${filters.brightness}%) saturate(${filters.saturation}%) contrast(${filters.contrast}%) hue-rotate(${filters.hue}deg) invert(${filters.brightness}%)`;
+    imgContainer.style.filter = `brightness(${filters.brightness}%) saturate(${filters.saturation}%) contrast(${filters.contrast}%) hue-rotate(${filters.hue}deg) invert(${filters.invert}%)`;
 }
+
 
 function updateFilter(filter, value) {
     filters[filter] = value;
@@ -107,6 +111,31 @@ function hue1() {
     updateFilter('hue', hueInput);
 }
 
+// invert
+function invert() {
+    let invertRange = document.getElementById("invert-range").value;
+    document.getElementById("invert-input").value = invertRange;
+    updateFilter('invert', invertRange);
+}
+
+function invert1() {
+    let invertInput = document.getElementById("invert-input").value;
+    document.getElementById("invert-range").value = invertInput;
+    updateFilter('invert', invertInput);
+}
+
+
+// reset all applied filters (filter reset button JavaScript )
 resetFilter.onclick = function resetFilter() {
     imgContainer.style.filter = "none";
+    document.getElementById("bright-range").value = 100;
+    document.getElementById("saturation-range").value = 100;
+    document.getElementById("contrast-range").value = 100;
+    document.getElementById("hue-range").value = 0;
+    document.getElementById("bright-input").value = 100;
+    document.getElementById("saturation-input").value = 100;
+    document.getElementById("contrast-input").value = 100;
+    document.getElementById("hue-input").value = 0;
+    document.getElementById("invert-range").value = 0;
+    document.getElementById("invert-input").value = 0;
 }

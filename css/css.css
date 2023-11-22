@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 * {
-    padding: 0;
+    -->padding: 0;
     margin: 0;
     box-sizing: border-box;
     font-family: 'Roboto Slab', serif;
@@ -51,9 +51,6 @@ body {
     padding: 10px;
 }
 
-
-/* ! file uploader css  */
-
 .file-upload-container {
     position: relative;
     width: 300px;
@@ -65,7 +62,6 @@ body {
     cursor: pointer;
 }
 
-/* * Style for the actual file input */
 #img-upload {
     width: 100%;
     height: 100%;
@@ -76,7 +72,6 @@ body {
     cursor: pointer;
 }
 
-/* * Style for the text inside the file input container */
 .file-upload-text {
     position: absolute;
     top: 50%;
@@ -104,20 +99,11 @@ body {
     outline: none;
 }
 
-/* ! file uploader css  end */
-
-
-
-
-/* ! Photo editor css */
-
-
 .edit-options {
     width: 50%;
     padding: 10px;
     margin: 20px;
 }
-
 
 #bright-range,
 #saturation-range,
@@ -133,7 +119,6 @@ body {
     border-radius: 5px;
 }
 
-/* Style for the range input thumb (slider handle) */
 #bright-range::-webkit-slider-thumb,
 #saturation-range::-webkit-slider-thumb,
 #contrast-range::-webkit-slider-thumb,
@@ -147,14 +132,12 @@ body {
     border-radius: 50%;
 }
 
-/* Hover effect for the range input */
 #bright-range:hover,
 #saturation-range:hover,
 #contrast-range:hover,
 #hue-range:hover {
     opacity: 1;
 }
-
 
 #bright-input,
 #saturation-input,
@@ -173,5 +156,3 @@ body {
 #hue-input:focus {
     outline: 1px solid #4CAF50;
 }
-
-/* ! Photo editor css end */
